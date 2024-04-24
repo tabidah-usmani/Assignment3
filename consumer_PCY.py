@@ -14,7 +14,7 @@ consumer = KafkaConsumer(
     auto_offset_reset='earliest', 
     enable_auto_commit=True,  
     group_id='my_consumer_group',  # consumer group id
-    value_deserializer=lambda x: json.loads(x.decode('utf-8')) if x else {}  # deserialize JSON messages
+    value_deserializer=lambda x: json.loads(x.decode('utf-8')) if x else {}  
 )
 
 # parameters for PCY
@@ -23,7 +23,7 @@ bucket_size = 10000       # size of the hash table for hash-based counting
 
 # hash function implementation
 def hash_pair(pair):
-    #hash of a pair of items and mod by bucket size for hash table index
+    #hash of a pair of items 
     return int(hashlib.sha256(json.dumps(pair, sort_keys=True).encode()).hexdigest(), 16) % bucket_size
 
 # streaming data processing
@@ -34,7 +34,7 @@ for message in consumer:
         logger.warning("Received empty message, skipping...") 
         continue
     
-    basket = message.value.get('products', [])  # extract products list from message
+    basket = message.value.get('products', []) 
     
     # initialize count structures for each message
     item_counts = {}
@@ -62,7 +62,7 @@ for message in consumer:
             if bitmap[bucket_index]:
                 frequent_pairs[pair] = frequent_pairs.get(pair, 0) + 1
     
-    # print insights or store results in a database
+    #store results in a database
     frequent_pairs = {k: v for k, v in frequent_pairs.items() if v >= support_threshold}
     logger.info("Current Frequent Pairs: %s", frequent_pairs)
 
