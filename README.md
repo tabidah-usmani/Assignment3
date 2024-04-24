@@ -23,13 +23,8 @@ This repository contains Python code examples for a Kafka consumer and producer.
 Kafka producer sends data from a JSON file to a Kafka topic.
 Kafka consumer processes messages from the Kafka topic to find frequent pairs using the PCY algorithm.
 
-# Installation
-Prerequisites
-Apache Kafka
-Python 3.x
-kafka-python library (pip install kafka-python)
 
-# Usage
+## Usage
 
 # Producer
 The kafka_producer.py script reads preprocessed data from a JSON file line by line and sends it to a Kafka topic named recommendation_engine_topic.
