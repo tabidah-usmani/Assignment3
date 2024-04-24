@@ -31,6 +31,7 @@ The kafka_producer.py script reads preprocessed data from a JSON file line by li
 
 ## Consumer
 The kafka_consumer_pcy.py script consumes messages from the recommendation_engine_topic Kafka topic. It processes the data to find frequent pairs using the PCY (Park-Chen-Yu) algorithm.
+The consumer3 script uses the frequency pattern growth and outputs the frequent itemsets with its support
 ## Implementation Details
 The consumer script initializes a Kafka consumer to subscribe to the recommendation_engine_topic topic.
 Each message consumed from Kafka represents a basket of items.
