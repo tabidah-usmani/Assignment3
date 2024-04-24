@@ -5,7 +5,6 @@ from mlxtend.frequent_patterns import fpgrowth
 import pandas as pd
 from collections import deque
 
-# Initialize Kafka consumer
 consumer = KafkaConsumer(
     'recommendation_engine_topic',
     bootstrap_servers='localhost:9092',
@@ -13,12 +12,12 @@ consumer = KafkaConsumer(
     auto_offset_reset='earliest'
 )
 
-# Sliding window size
+#utilizing sliding window approach
 window_size = 10
 
-# Queue for maintaining the sliding window
 window_queue = deque(maxlen=window_size)
 
+#finding jaccard similarity for each message being receivd by the producer and then identifying frequent itemsets
 def find_frequent_itemsets(window_items, min_support=0.01):
     """Find frequent itemsets using the FP-Growth algorithm."""
     te = TransactionEncoder()
@@ -33,26 +32,20 @@ def jaccard_similarity(set1, set2):
     union = len(set1.union(set2))
     return intersection / union if union != 0 else 0
 
-# Subscribe to the topic
 consumer.subscribe(['recommendation_engine_topic'])
 
-# Consume messages
 for message in consumer:
     try:
         data = json.loads(message.value.decode('utf-8'))
         print("Consumer received:", data)
         
         if 'also_buy' in data and isinstance(data['also_buy'], str):
-            # Extract items from the 'also_buy' column
             items = set(data['also_buy'].split())
             
-            # Add items to the sliding window queue
             window_queue.append(items)
             
-            # Create a list of all items in the window
             window_items = [item for window in window_queue for item in window]
             
-            # Find frequent itemsets using the current window
             frequent_itemsets = find_frequent_itemsets(window_items, min_support=0.01)
             print("Frequent Itemsets Found:", frequent_itemsets)
         
