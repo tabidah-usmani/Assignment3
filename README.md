@@ -40,6 +40,7 @@ Frequent pairs are printed as insights or can be stored in a database for furthe
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
 
+## Creators:
 Amna Javaid,
 Maryam Khalid,
 Tabidah Usmani
