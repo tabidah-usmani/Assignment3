@@ -14,7 +14,7 @@ The preprocessing code is divided into several steps:
 This preprocessing prepares the data set for finding frequent itemsets.
 
 
-# Kafka Consumer and Producer Example
+# Kafka Consumer and Producer 
 
 # Description
 This repository contains Python code examples for a Kafka consumer and producer. These scripts demonstrate how to implement a simple Kafka consumer and producer using the kafka-python library.
@@ -22,3 +22,20 @@ This repository contains Python code examples for a Kafka consumer and producer.
 # Features
 Kafka producer sends data from a JSON file to a Kafka topic.
 Kafka consumer processes messages from the Kafka topic to find frequent pairs using the PCY algorithm.
+
+# Installation
+Prerequisites
+Apache Kafka
+Python 3.x
+kafka-python library (pip install kafka-python)
+
+# Usage
+
+# Producer
+The kafka_producer.py script reads preprocessed data from a JSON file line by line and sends it to a Kafka topic named recommendation_engine_topic.
+
+# Consumer
+The kafka_consumer_pcy.py script consumes messages from the recommendation_engine_topic Kafka topic. It processes the data to find frequent pairs using the PCY (Park-Chen-Yu) algorithm.
+
+# Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
