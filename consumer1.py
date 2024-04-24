@@ -14,7 +14,7 @@ class AprioriStreaming:
         self.transactions = []
 
     def process_transaction(self, transaction):
-        # Add transaction to the sliding window
+        
         self.window.append(transaction)
         
         # Remove oldest transactions if window size exceeds the specified size
@@ -56,7 +56,7 @@ class AprioriStreaming:
         # Convert transformed data to DataFrame
         df_encoded = pd.DataFrame(te_ary, columns=te.columns_)
         
-        # Print DataFrame for debugging
+        
         print("Encoded DataFrame:")
         print(df_encoded)
         
@@ -70,14 +70,14 @@ class AprioriStreaming:
         # Generate association rules
         rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
         
-        # Print association rules
+        
         print("\nAssociation Rules:")
         print(rules)
 
-# Initialize Kafka consumer
+# Initialize Kafka consumer, setting the kafka topic, localhost id, and the id of consumer
 consumer = KafkaConsumer('recommendation_engine_topic', bootstrap_servers='localhost:9092', group_id='my_consumer_group')
 
-# Subscribe to the topic
+# Connect with the topic of producer
 consumer.subscribe(topics=['recommendation_engine_topic'])
 
 # Initialize AprioriStreaming with a window size and minimum support
@@ -85,7 +85,7 @@ window_size = 100
 min_support = 0.3
 apriori_streaming = AprioriStreaming(min_support, window_size)
 
-# Consume messages
+
 for message in consumer:
     try:
         data = json.loads(message.value.decode('utf-8'))
