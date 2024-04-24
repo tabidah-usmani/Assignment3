@@ -17,11 +17,11 @@ This preprocessing prepares the data set for finding frequent itemsets.
 # Kafka Consumer and Producer 
 
 # Description
-This repository contains Python code examples for a Kafka consumer and producer. These scripts demonstrate how to implement a simple Kafka consumer and producer using the kafka-python library.
+This repository contains Python code examples for a Kafka consumer and producer. These scripts demonstrate how to implement a simple Kafka consumer and producer using the Kafka-python library.
 
 # Features
-Kafka producer sends data from a JSON file to a Kafka topic.
-Kafka consumer processes messages from the Kafka topic to find frequent pairs using the PCY algorithm.
+The Kafka producer sends data from a JSON file to a Kafka topic.
+Kafka consumers process messages from the Kafka topic to find frequent pairs using the PCY algorithm.
 
 
 # Usage
@@ -36,6 +36,9 @@ The consumer script initializes a Kafka consumer to subscribe to the recommendat
 Each message consumed from Kafka represents a basket of items.
 The script processes each basket using the PCY algorithm to find frequent pairs.
 Frequent pairs are printed as insights or can be stored in a database for further analysis.
+
+### Consumer1
+The first consumer implements the Apriori algorithm. Firstly, a minimum support and window size is set, which in turn is used to process each transaction and discover associations between the itemsets.
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
