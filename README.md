@@ -24,13 +24,13 @@ Kafka producer sends data from a JSON file to a Kafka topic.
 Kafka consumer processes messages from the Kafka topic to find frequent pairs using the PCY algorithm.
 
 
-## Usage
+# Usage
 
-# Producer
+## Producer
 The kafka_producer.py script reads preprocessed data from a JSON file line by line and sends it to a Kafka topic named recommendation_engine_topic.
 
-# Consumer
+## Consumer
 The kafka_consumer_pcy.py script consumes messages from the recommendation_engine_topic Kafka topic. It processes the data to find frequent pairs using the PCY (Park-Chen-Yu) algorithm.
 
-# Contributing
+## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
