@@ -2,6 +2,9 @@ from kafka import KafkaConsumer
 import json
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
+from pymongo import MongoClient
+
+# Download VADER lexicon
 nltk.download('vader_lexicon')
 
 bootstrap_servers = ['localhost:9092']
@@ -26,7 +29,12 @@ def analyze_sentiment(description):
     else:
         return 'Neutral'
 
-# Main loop to consume messages and perform sentiment analysis
+# MongoDB setup
+client = MongoClient('localhost', 27017)
+db = client['sentiment_analysis_db']
+collection = db['product_sentiments']
+
+# Main loop to consume messages, perform sentiment analysis, and save results to MongoDB
 for message in consumer:
     product_info = message.value
     products_list.append(product_info)
@@ -35,6 +43,12 @@ for message in consumer:
         for data in products_list:
             description = data.get('description', '')
             sentiment = analyze_sentiment(description)
+            sentiment_data = {
+                'title': data['title'],
+                'sentiment': sentiment
+            }
+            # Save sentiment analysis result to MongoDB
+            collection.insert_one(sentiment_data)
             print(f"Sentiment analysis for {data['title']}: {sentiment}")
 
         products_list = []  # Clear the list after processing

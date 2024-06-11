@@ -10,7 +10,7 @@ def send_data(topic, data):
     producer.send(topic, json.dumps(data).encode('utf-8'))
 
 # Read and parse preprocessed data from file line by line
-with open('/home/amna/kafka/preprocessed_data.json', 'r') as file:
+with open('/home/tabidah/kafka/assignment/preprocessed_data.json', 'r') as file:
     for line in file:
         try:
             data = json.loads(line.strip())  # Strip any leading/trailing whitespace
